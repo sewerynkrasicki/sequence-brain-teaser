@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class Board extends JFrame {
     JPanel plansza = new JPanel();
     JPanel menu = new JPanel();
-    JButton[][] tab = new JButton[10][10];
-
+    fillBoard fillboard = new fillBoard();
     public Board(){
         //center
         setLocationRelativeTo(null);
@@ -17,18 +17,21 @@ public class Board extends JFrame {
         cp.add(plansza);
         cp.add(menu);
         cp.setLayout(new GridLayout(1,2));
-        plansza.setLayout(new GridLayout(10,10));
-        for(int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++)
+        plansza.setLayout(new GridLayout(12,12));
+
+
+        for(int i = 0; i < 12; i ++)
+        {
+            for(int j = 0 ; j < 12; j++)
             {
-                tab[i][j]=new JButton("");
-                (tab[i][j]).addActionListener(new zmianaKlawiszy());
-                plansza.add(tab[i][j]);
+                fillboard.tab[i][j].setMargin(new Insets(0,0,0,0));
+                plansza.add(fillboard.tab[i][j]);
             }
         }
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
+    //Zmiana koloru elementow planszy
     static class zmianaKlawiszy implements ActionListener
     {
 
