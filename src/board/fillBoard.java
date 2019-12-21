@@ -91,5 +91,8 @@ public class fillBoard{
                 (tab[i][j]).addActionListener(new Board.zmianaKlawiszy());
             }
         }
+        if (numbers != null) {
+            numbers.close();
+        }
     }
 }

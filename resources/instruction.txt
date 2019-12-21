@@ -1,0 +1,1 @@
+Cyfry przy brzegu diagramu oznaczają, z ilu pól czarnych (cyfry u góry i z lewej strony) lub białych (cyfry u dołu i z prawej strony) składa się najdłuższa sekwencja (nieprzerwany ciąg pól) w danym rzędzie lub kolumnie. Zaczernione przy wykorzystaniu tych współrzędnych odpowiednie pola - utworzą rysunek.
