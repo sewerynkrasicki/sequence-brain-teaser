@@ -8,58 +8,49 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class fillBoard{
-    public JButton[][] tab = new JButton[12][12];
+    public JButton[][] tab;
+    public int finalSize;
+    //set array of buttons
+    public void setTab(JButton[][] tab)
+    {
+        this.tab = tab;
+    }
+    //set size to fill
+    public void setSize(int finalSize)
+    {
+        this.finalSize = finalSize;
+    }
 
-    public fillBoard() {
-        File file = new File("./resources/input.txt");
-
+    //read numbers from file
+    public Scanner readNumbers(File file){
         Scanner numbers = null;
         try {
             numbers = new Scanner(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return numbers;
 
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
+    }
+
+    public fillBoard(File file) {
+        Scanner numbers1 = readNumbers(file);
+        int count = Integer.parseInt(numbers1.nextLine());
+        setSize(count+2);
+        int fill = count+1;
+        JButton[][] arr = new JButton[finalSize][finalSize];
+        setTab(arr);
+
+        for (int i = 0; i < finalSize; i++) {
+            for (int j = 0; j < finalSize; j++) {
                 tab[i][j] = new JButton("");
             }
         }
 
-        //south line of numbers
-        for (int i = 0; i < 12; i++) {
-            if (numbers != null) {
-                tab[11][i].setText(numbers.nextLine());
-            }
-            tab[11][i].setRolloverEnabled(false);
-            tab[11][i].setFocusable(false);
-            tab[11][i].setFocusPainted(false);
-            tab[11][i].setBackground(Color.WHITE);
-            tab[11][i].setContentAreaFilled(false);
-            for (MouseListener ml : tab[11][i].getMouseListeners()) {
-                tab[11][i].removeMouseListener(ml);
-            }
-        }
-
-        //east line of numbers
-        for (int i = 0; i < 12; i++) {
-            if (numbers != null) {
-                tab[i][11].setText(numbers.nextLine());
-            }
-            tab[i][11].setRolloverEnabled(false);
-            tab[i][11].setFocusable(false);
-            tab[i][11].setFocusPainted(false);
-            tab[i][11].setBackground(Color.WHITE);
-            tab[i][11].setContentAreaFilled(false);
-            for (MouseListener ml : tab[i][11].getMouseListeners()) {
-                tab[i][11].removeMouseListener(ml);
-            }
-        }
-
-        //north line of numbers
-        for (int i = 0; i < 12; i++) {
-            if (numbers != null) {
-                tab[0][i].setText(numbers.nextLine());
+        //north line of numbers1
+        for (int i = 0; i < finalSize; i++) {
+            if (numbers1.hasNextLine()) {
+                tab[0][i].setText(numbers1.nextLine());
             }
             tab[0][i].setRolloverEnabled(false);
             tab[0][i].setFocusable(false);
@@ -71,10 +62,41 @@ public class fillBoard{
             }
         }
 
-        //west line of numbers
-        for (int i = 1; i < 12; i++) {
-            if (numbers != null) {
-                tab[i][0].setText(numbers.nextLine());
+        //east line of numbers1
+        for (int i = 0; i < finalSize; i++) {
+            if (numbers1.hasNextLine()) {
+                tab[i][fill].setText(numbers1.nextLine());
+            }
+            tab[i][fill].setRolloverEnabled(false);
+            tab[i][fill].setFocusable(false);
+            tab[i][fill].setFocusPainted(false);
+            tab[i][fill].setBackground(Color.WHITE);
+            tab[i][fill].setContentAreaFilled(false);
+            for (MouseListener ml : tab[i][fill].getMouseListeners()) {
+                tab[i][fill].removeMouseListener(ml);
+            }
+        }
+
+
+        //south line of numbers1
+        for (int i = 0; i < finalSize; i++) {
+            if (numbers1.hasNextLine()) {
+                tab[fill][i].setText(numbers1.nextLine());
+            }
+            tab[fill][i].setRolloverEnabled(false);
+            tab[fill][i].setFocusable(false);
+            tab[fill][i].setFocusPainted(false);
+            tab[fill][i].setBackground(Color.WHITE);
+            tab[fill][i].setContentAreaFilled(false);
+            for (MouseListener ml : tab[fill][i].getMouseListeners()) {
+                tab[fill][i].removeMouseListener(ml);
+            }
+        }
+
+        //west line of numbers1
+        for (int i = 1; i < finalSize; i++) {
+            if (numbers1.hasNextLine()) {
+                tab[i][0].setText(numbers1.nextLine());
             }
             tab[i][0].setRolloverEnabled(false);
             tab[i][0].setFocusable(false);
@@ -85,14 +107,12 @@ public class fillBoard{
                 tab[i][0].removeMouseListener(ml);
             }
         }
-        for (int i = 1; i <= 10; i++) {
-            for (int j = 1; j <= 10; j++) {
+        for (int i = 1; i <= count; i++) {
+            for (int j = 1; j <= count; j++) {
                 tab[i][j] = new JButton("");
                 (tab[i][j]).addActionListener(new Board.zmianaKlawiszy());
             }
         }
-        if (numbers != null) {
-            numbers.close();
-        }
+        numbers1.close();
     }
 }

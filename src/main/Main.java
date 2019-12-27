@@ -1,12 +1,13 @@
 package main;
 
 import board.Board;
+import board.Menu;
+
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame b = new Board();
-        b.setSize(1000,800);
-        b.setVisible(true);
+        JFrame menu = new Menu();
+        menu.setVisible(true);
     }
 }

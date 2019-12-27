@@ -9,44 +9,51 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class menuBar extends JMenuBar {
+
     JMenu m1 = new JMenu("Options");
     JMenu m2 = new JMenu("Help");
     JMenuItem m1i = new JMenuItem("Instruction");
-    menuBar(){
+    JMenuItem m2i = new JMenuItem("Return to main menu");
+
+    menuBar() {
         add(m1);
         add(m2);
         m2.add(m1i);
-        setPreferredSize(new Dimension(50,50));
+        m1.add(m2i);
+        setPreferredSize(new Dimension(50, 50));
+        m2i.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JFrame b = new Menu();
+                b.setVisible(true);
+            }
+        });
         m1i.addActionListener(new popUp());
     }
 }
 
-class popUp implements ActionListener
-{
+class popUp implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         JDialog dial = new dialog();
-        dial.setSize(500,500);
+        dial.setSize(500, 500);
         dial.setVisible(true);
     }
 }
 
-class dialog extends JDialog{
+class dialog extends JDialog {
     JLabel jlText = new JLabel();
     ImageIcon imageIcon = new ImageIcon("./resources/image.gif");
+    File file = new File("./resources/instruction.txt");
 
-    public String readFromFile()
-    {
+    public String readFromFile(File file) {
         String currString = "";
         String string = "";
-        File file = new File("./resources/instruction.txt");
-
         Scanner ins;
         {
             try {
                 ins = new Scanner(file);
-                while(ins.hasNextLine())
-                {
+                while (ins.hasNextLine()) {
                     currString = "<br>" + ins.nextLine() + "</br>";
                     string = string.concat(currString);
                 }
@@ -58,12 +65,21 @@ class dialog extends JDialog{
         return string;
     }
 
-    dialog(){
+    dialog() {
         jlText.setIcon(imageIcon);
-        jlText.setText("<html>" +readFromFile() + "</html>");
+        jlText.setText("<html>" + readFromFile(file) + "</html>");
         add(jlText);
         setTitle("Instruction");
         setLocationRelativeTo(null);
+    }
+}
+
+class returnToMainMenu implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        JFrame b = new Menu();
+        b.setVisible(true);
     }
 }
 
