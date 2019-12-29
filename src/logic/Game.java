@@ -97,9 +97,9 @@ public class Game {
             x++;
         }
         if(topSequenceBlack)
-            setTOP("GOOD");
+            setTOP("TOP: GOOD");
         else
-            setTOP("BAD");
+            setTOP("TOP: BAD");
 
         longestSequenceBlack=0;
         x=1;
@@ -137,9 +137,9 @@ public class Game {
             x++;
         }
         if(sideSequenceBlack)
-            setLEFT_SIDE("GOOD");
+            setLEFT_SIDE("LEFT: GOOD");
         else
-            setLEFT_SIDE("BAD");
+            setLEFT_SIDE("LEFT: BAD");
 
         x=1;
         counter=0;
@@ -175,9 +175,9 @@ public class Game {
             x++;
         }
         if(sideSequenceWhite)
-            setRIGHT_SIDE("GOOD");
+            setRIGHT_SIDE("RIGHT: GOOD");
         else
-            setRIGHT_SIDE("BAD");
+            setRIGHT_SIDE("RIGHT: BAD");
 
         x=1;
         counter=0;
@@ -214,9 +214,9 @@ public class Game {
             x++;
         }
         if(bottomSequenceWhite)
-            setBOTTOM("GOOD");
+            setBOTTOM("BOTTOM: GOOD");
         else
-            setBOTTOM("BAD");
+            setBOTTOM("BOTTOM: BAD");
 
         if(topSequenceBlack && bottomSequenceWhite && sideSequenceBlack && sideSequenceWhite)
             setOVERALL("WIN");

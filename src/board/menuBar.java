@@ -21,13 +21,6 @@ public class menuBar extends JMenuBar {
         m2.add(m1i);
         m1.add(m2i);
         setPreferredSize(new Dimension(50, 50));
-        m2i.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JFrame b = new Menu();
-                b.setVisible(true);
-            }
-        });
         m1i.addActionListener(new popUp());
     }
 }
