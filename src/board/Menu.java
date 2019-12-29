@@ -1,5 +1,7 @@
 package board;
 
+import logic.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

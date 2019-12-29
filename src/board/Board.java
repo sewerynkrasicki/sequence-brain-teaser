@@ -1,5 +1,7 @@
 package board;
 
+import logic.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,7 @@ import java.io.File;
 public class Board extends JFrame {
     JPanel plansza = new JPanel();
     JMenuBar mb = new menuBar();
+    JButton checkTheWin = new JButton("Check win");
 
     public Board(fillBoard fillboard){
         dispose();
@@ -25,6 +28,15 @@ public class Board extends JFrame {
                 plansza.add(fillboard.tab[i][j]);
             }
         }
+        checkTheWin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Game game = new Game();
+                game.checkWin(fillboard.tab, fillboard.finalSize-2);
+            }
+        });
+        add(checkTheWin, BorderLayout.EAST);
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -37,6 +49,7 @@ public class Board extends JFrame {
             if(but.getBackground() == Color.BLACK)
                 but.setBackground(null);
             else but.setBackground(Color.BLACK);
+
         }
     }
 }

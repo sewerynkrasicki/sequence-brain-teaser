@@ -1,7 +1,11 @@
 package board;
 
+import logic.Game;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +18,8 @@ public class fillBoard{
     public void setTab(JButton[][] tab)
     {
         this.tab = tab;
+    }
+    public JButton[][] getTab(){return tab;
     }
     //set size to fill
     public void setSize(int finalSize)
@@ -111,6 +117,15 @@ public class fillBoard{
             for (int j = 1; j <= count; j++) {
                 tab[i][j] = new JButton("");
                 (tab[i][j]).addActionListener(new Board.zmianaKlawiszy());
+                /*
+                (tab[i][j]).addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        Game game = new Game();
+                        game.checkWin(tab, count);
+                    }
+                });
+                 */
             }
         }
         numbers1.close();
