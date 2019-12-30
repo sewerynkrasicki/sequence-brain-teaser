@@ -58,14 +58,38 @@ public class ownBoardFrame extends JFrame {
         String getEast = east.getText();
 
         PrintWriter writer = new PrintWriter("./resources/ownGame.txt", StandardCharsets.UTF_8);
-        writer.println(String.valueOf(getSize).replaceAll("(\\d)", "$1" + System.lineSeparator()));
-        writer.println(String.valueOf(getNorth).replaceAll("(\\d)", "$1" + System.lineSeparator()));
+
+        int size = Integer.parseInt(getSize);
+        String[] s1 = getNorth.split(" ");
+        String[] s2 = getSouth.split(" ");
+        String[] s3 = getWest.split(" ");
+        String[] s4 = getEast.split(" ");
+
+        writer.println(size);
         writer.println();
-        writer.println(String.valueOf(getEast).replaceAll("(\\d)", "$1" + System.lineSeparator()));
+        for(int i = 0; i < size; i++)
+        {
+            writer.println(s1[i]);
+        }
         writer.println();
-        writer.println(String.valueOf(getSouth).replaceAll("(\\d)", "$1" + System.lineSeparator()));
-        writer.println(String.valueOf(getWest).replaceAll("(\\d)", "$1" + System.lineSeparator()));
-        writer.close();
+        writer.println();
+        for(int i = 0; i < size; i++)
+        {
+            writer.println(s4[i]);
+        }
+        writer.println();
+        writer.println();
+        for(int i = 0; i < size; i++)
+        {
+            writer.println(s2[i]);
+        }
+        writer.println();
+        for(int i = 0; i < size; i++)
+        {
+            writer.println(s3[i]);
+        }
+
+         writer.close();
 
     }
 

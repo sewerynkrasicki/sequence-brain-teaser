@@ -14,12 +14,20 @@ public class menuBar extends JMenuBar {
     JMenu m2 = new JMenu("Help");
     JMenuItem m1i = new JMenuItem("Instruction");
     JMenuItem m2i = new JMenuItem("Return to main menu");
+    JMenuItem m3i = new JMenuItem("Save");
+    JMenuItem m4i = new JMenuItem("Load");
+    JMenu m3 = new JMenu("Undo");
+    JMenu m4 = new JMenu("Redo");
 
     menuBar() {
         add(m1);
         add(m2);
+        add(m3);
+        add(m4);
         m2.add(m1i);
         m1.add(m2i);
+        m1.add(m3i);
+        m1.add(m4i);
         setPreferredSize(new Dimension(50, 50));
         m1i.addActionListener(new popUp());
     }
