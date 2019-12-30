@@ -19,6 +19,7 @@ public class Board extends JFrame {
     JTextField bottomText = new JTextField(10);
     public Board(fillBoard fillboard){
         dispose();
+        setTitle("Sequence");
         //center
         setLocationRelativeTo(null);
         add(plansza);

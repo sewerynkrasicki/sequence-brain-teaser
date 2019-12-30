@@ -9,19 +9,17 @@ import java.nio.charset.StandardCharsets;
 
 public class ownBoardFrame extends JFrame {
     JTextField size = new JTextField("Size of sequence");
-    JTextField north = new JTextField("North line of numbers");
-    JTextField south = new JTextField("South line of numbers");
-    JTextField east = new JTextField("East line of numbers");
-    JTextField west = new JTextField("West line of numbers");
-    JButton complete = new JButton("Complete");
+    JTextField north = new JTextField("North line of numbers (separated by space)");
+    JTextField south = new JTextField("South line of numbers (separated by space)");
+    JTextField east = new JTextField("East line of numbers (separated by space)");
+    JTextField west = new JTextField("West line of numbers (separated by space)");
+    JButton complete = new JButton("Create");
     JPanel textPanel = new JPanel();
 
     public ownBoardFrame() {
         dispose();
         setLocationRelativeTo(null);
-        setSize(500, 600);
-        setVisible(true);
-
+        setTitle("Creator");
         complete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

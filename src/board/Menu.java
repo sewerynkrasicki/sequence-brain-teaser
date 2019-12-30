@@ -16,6 +16,7 @@ public class Menu extends JFrame {
     public Menu()
     {
         dispose();
+        setTitle("Menu");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -38,7 +39,7 @@ public class Menu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
                 JFrame own = new ownBoardFrame();
-                own.setSize(1000,800);
+                own.setSize(400,500);
                 own.setVisible(true);
             }
         });

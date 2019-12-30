@@ -6,7 +6,7 @@ My final project to pass Java labs
 - ~~Add possibility to create own board~~
 - ~~The color of the board can be changed with a click~~
 - ~~Instruction for player in top menu~~
-- logic of the game
+- ~~logic of the game~~
 - Next/Undo function
 - possibility to save / load the game
 
