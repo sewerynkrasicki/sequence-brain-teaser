@@ -1,31 +1,29 @@
 package board;
 
-import logic.Game;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class fillBoard{
-    public JButton[][] tab;
-    public int finalSize;
+    private JButton[][] tab;
+    private int finalSize;
+
     //set array of buttons
     public void setTab(JButton[][] tab)
     {
         this.tab = tab;
     }
-    public JButton[][] getTab(){return tab;
-    }
+    public JButton[][] getTab(){return tab; }
+
     //set size to fill
     public void setSize(int finalSize)
     {
         this.finalSize = finalSize;
     }
+    public int getSize(){return finalSize;}
 
     //read numbers from file
     public Scanner readNumbers(File file){
@@ -36,14 +34,15 @@ public class fillBoard{
             e.printStackTrace();
         }
         return numbers;
-
     }
 
     public fillBoard(File file) {
         Scanner numbers1 = readNumbers(file);
+
         int count = Integer.parseInt(numbers1.nextLine());
         setSize(count+2);
         int fill = count+1;
+
         JButton[][] arr = new JButton[finalSize][finalSize];
         setTab(arr);
 
@@ -113,19 +112,11 @@ public class fillBoard{
                 tab[i][0].removeMouseListener(ml);
             }
         }
+
         for (int i = 1; i <= count; i++) {
             for (int j = 1; j <= count; j++) {
                 tab[i][j] = new JButton("");
                 (tab[i][j]).addActionListener(new Board.zmianaKlawiszy());
-                /*
-                (tab[i][j]).addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        Game game = new Game();
-                        game.checkWin(tab, count);
-                    }
-                });
-                 */
             }
         }
         numbers1.close();

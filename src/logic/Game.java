@@ -5,64 +5,56 @@ import java.awt.*;
 
 
 public class Game {
-    private String TOP;
-    private String BOTTOM;
-    private String LEFT_SIDE;
-    private String RIGHT_SIDE;
-    private String OVERALL;
+    private boolean TOP, BOTTOM, LEFT_SIDE, RIGHT_SIDE, OVERALL;
 
     //GETTERS AND SETTERS
 
-
-    public void setOVERALL(String OVERALL) {
+    public void setOVERALL(boolean OVERALL) {
         this.OVERALL = OVERALL;
     }
 
-    public void setTOP(String TOP) {
+    public void setTOP(boolean TOP) {
         this.TOP = TOP;
     }
 
-    public void setBOTTOM(String BOTTOM) {
+    public void setBOTTOM(boolean BOTTOM) {
         this.BOTTOM = BOTTOM;
     }
 
-    public void setLEFT_SIDE(String LEFT_SIDE) {
+    public void setLEFT_SIDE(boolean LEFT_SIDE) {
         this.LEFT_SIDE = LEFT_SIDE;
     }
 
-    public void setRIGHT_SIDE(String RIGHT_SIDE) {
+    public void setRIGHT_SIDE(boolean RIGHT_SIDE) {
         this.RIGHT_SIDE = RIGHT_SIDE;
     }
 
-    public String getRIGHT_SIDE() {
+    public boolean getRIGHT_SIDE() {
         return RIGHT_SIDE;
     }
 
-    public String getBOTTOM() {
+    public boolean getBOTTOM() {
         return BOTTOM;
     }
 
-    public String getLEFT_SIDE() {
+    public boolean getLEFT_SIDE() {
         return LEFT_SIDE;
     }
 
-    public String getTOP() {
+    public boolean getTOP() {
         return TOP;
     }
 
-    public String getOVERALL() {
+    public boolean getOVERALL() {
         return OVERALL;
     }
 
     public void checkWin(JButton[][] but, int maxSize){
-        int longestSequenceBlack;
-        int longestSequenceWhite;
-        int x = 1;
-        int counter = 0;
-        boolean topSequenceBlack = true;
-        boolean sideSequenceBlack = true;
-        boolean sideSequenceWhite = true;
-        boolean bottomSequenceWhite = true;
+        int longestSequenceBlack, longestSequenceWhite;
+        int x = 1, counter = 0;
+        boolean topSequenceBlack = true, bottomSequenceWhite = true;
+        boolean sideSequenceBlack = true, sideSequenceWhite = true;
+
         Color color = new JButton().getBackground();
 
         //Check top sequence of black boxes
@@ -97,11 +89,10 @@ public class Game {
             x++;
         }
         if(topSequenceBlack)
-            setTOP("TOP: GOOD");
+            setTOP(true);
         else
-            setTOP("TOP: BAD");
+            setTOP(false);
 
-        longestSequenceBlack=0;
         x=1;
         counter=0;
 
@@ -137,9 +128,9 @@ public class Game {
             x++;
         }
         if(sideSequenceBlack)
-            setLEFT_SIDE("LEFT: GOOD");
+            setLEFT_SIDE(true);
         else
-            setLEFT_SIDE("LEFT: BAD");
+            setLEFT_SIDE(false);
 
         x=1;
         counter=0;
@@ -175,13 +166,12 @@ public class Game {
             x++;
         }
         if(sideSequenceWhite)
-            setRIGHT_SIDE("RIGHT: GOOD");
+            setRIGHT_SIDE(true);
         else
-            setRIGHT_SIDE("RIGHT: BAD");
+            setRIGHT_SIDE(false);
 
         x=1;
         counter=0;
-        longestSequenceWhite=0;
 
         while(x<=maxSize)
         {
@@ -207,26 +197,20 @@ public class Game {
                     bottomSequenceWhite= true;
                 }
             }
-            //System.out.println(sideSequenceBlack);
             if(!bottomSequenceWhite)
                 break;
             counter = 0;
             x++;
         }
         if(bottomSequenceWhite)
-            setBOTTOM("BOTTOM: GOOD");
+            setBOTTOM(true);
         else
-            setBOTTOM("BOTTOM: BAD");
+            setBOTTOM(false);
 
         if(topSequenceBlack && bottomSequenceWhite && sideSequenceBlack && sideSequenceWhite)
-            setOVERALL("WIN");
+            setOVERALL(true);
         else
-            setOVERALL("LOSE");
-
-
-
-
-
+            setOVERALL(false);
     }
 
 }

@@ -10,48 +10,34 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class menuBar extends JMenuBar {
-
-    JMenu m1 = new JMenu("Options");
-    JMenu m2 = new JMenu("Help");
-    JMenuItem m1i = new JMenuItem("Instruction");
-    JMenuItem m2i = new JMenuItem("Return to main menu");
-    JMenuItem m3i = new JMenuItem("Save");
-    JMenuItem m4i = new JMenuItem("Load");
-    JMenu m3 = new JMenu("Undo");
-    JMenu m4 = new JMenu("Redo");
-    JFileChooser jfcSave = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-    JFileChooser jfcLoad = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    private JMenu optionsMenu = new JMenu("Options");
+    private JMenu helpMenu = new JMenu("Help");
+    private JMenu undoMenu = new JMenu("Undo");
+    private JMenu redoMenu = new JMenu("Redo");
+    private JMenuItem instructionItem = new JMenuItem("Instruction");
+    private JMenuItem returnToMainMenuItem = new JMenuItem("Return to main menu");
+    private JMenuItem saveMenuItem = new JMenuItem("Save");
+    private JMenuItem loadMenuItem = new JMenuItem("Load");
+    private JFileChooser jfcLoad = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
     menuBar() {
-        add(m1);
-        add(m2);
-        add(m3);
-        add(m4);
-        m2.add(m1i);
-        m1.add(m2i);
-        m1.add(m3i);
-        m1.add(m4i);
-        m3i.addActionListener(new saveFile());
-        m4i.addActionListener(new loadFile());
         setPreferredSize(new Dimension(50, 50));
-        m1i.addActionListener(new popUp());
+
+        add(optionsMenu);
+        add(helpMenu);
+        add(undoMenu);
+        add(redoMenu);
+
+        helpMenu.add(instructionItem);
+
+        optionsMenu.add(returnToMainMenuItem);
+        optionsMenu.add(saveMenuItem);
+        optionsMenu.add(loadMenuItem);
+
+        loadMenuItem.addActionListener(new loadFile());
+        instructionItem.addActionListener(new popUp());
     }
 
-    class saveFile implements ActionListener
-    {
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            jfcSave.setDialogTitle("Choose a directory to save your file: ");
-            jfcSave.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int returnValue = jfcSave.showSaveDialog(null);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                if (jfcSave.getSelectedFile().isDirectory()) {
-                    System.out.println("You selected the directory: " + jfcSave.getSelectedFile());
-                }
-            }
-        }
-    }
 
     class loadFile implements ActionListener
     {
@@ -65,14 +51,15 @@ public class menuBar extends JMenuBar {
             }
         }
     }
-}
 
-class popUp implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        JDialog dial = new dialog();
-        dial.setSize(500, 500);
-        dial.setVisible(true);
+
+    static class popUp implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            JDialog dial = new dialog();
+            dial.setSize(500, 500);
+            dial.setVisible(true);
+        }
     }
 }
 
@@ -106,15 +93,6 @@ class dialog extends JDialog {
         add(jlText);
         setTitle("Instruction");
         setLocationRelativeTo(null);
-    }
-}
-
-class returnToMainMenu implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        JFrame b = new Menu();
-        b.setVisible(true);
     }
 }
 
