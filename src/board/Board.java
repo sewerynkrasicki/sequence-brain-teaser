@@ -1,124 +1,73 @@
 package board;
 
-import logic.Game;
+import board.action.ButtonClickEvent;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Board extends JFrame {
-    private JPanel _board = new JPanel();
-    private JMenuBar _menuBar = new menuBar();
-    private JButton _checkTheWin = new JButton("Check win");
-    private JPanel _bottomTextPanel = new JPanel();
-    private JTextField topScore = new JTextField("TOP", 10);
-    private JTextField leftScore = new JTextField("LEFT-SIDE", 10);
-    private JTextField rightScore = new JTextField("RIGHT-SIDE" ,10);
-    private JTextField bottomScore = new JTextField("BOTTOM", 10);
-    private JFileChooser jfcSave = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-    private fillBoard fill;
 
-    public fillBoard getFill() {
-        return fill;
-    }
+    public JPanel board = new JPanel();
+    public JPanel bottomTextPanel = new JPanel();
+    public JButton checkTheWin = new JButton("Check the win");
+    public JMenuBar menuBar;
+    public Field[][] fields;
+    public int size;
+    public JButton newGame, ownGame, saveGame, loadGame, previous, next;
 
-    public void setFill(fillBoard fill) {
-        this.fill = fill;
-    }
-
-    public Board(fillBoard fillboard){
-        setFill(fillboard);
-        setTitle("Sequence");
-        setLocationRelativeTo(null);
+    public Board(int size) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
         setSize(1000, 800);
+        setTitle("Sequence");
+        setResizable(false);
 
-        //Grid Board
-        add(_board);
-        _board.setLayout(new GridLayout(fillboard.getSize(),fillboard.getSize()));
-
-        //add menuBar and return to main menu in menuitem
-        _menuBar.getMenu(0).getItem(0).addActionListener(new returnToMainMenu());
-        add(BorderLayout.NORTH, _menuBar);
-
-
-        for(int i = 0; i < fillboard.getSize(); i ++)
-        {
-            for(int j = 0 ; j < fillboard.getSize(); j++)
-            {
-                fillboard.getTab()[i][j].setMargin(new Insets(0,0,0,0));
-                _board.add(fillboard.getTab()[i][j]);
-            }
-        }
-
-        _checkTheWin.addActionListener(new checkWin());
-
-        //ScorePanel
-        _bottomTextPanel.add(topScore);
-        _bottomTextPanel.add(leftScore);
-        _bottomTextPanel.add(rightScore);
-        _bottomTextPanel.add(bottomScore);
-        add(_bottomTextPanel, BorderLayout.SOUTH);
-
-        //Check win button
-        add(_checkTheWin, BorderLayout.EAST);
+        this.size = size;
+        fields = new Field[size][size];
+        this.menuBar = new MenuBar();
+        this.setMenuBar();
+        initializeFields();
+        add(BorderLayout.NORTH, menuBar);
+        add(board);
+        add(BorderLayout.EAST, checkTheWin);
+        add(BorderLayout.SOUTH, bottomTextPanel);
+        setVisible(true);
     }
 
-    //Changing the color of board elements
-    static class zmianaKlawiszy implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            JButton but = (JButton) actionEvent.getSource();
-            if(but.getBackground() == Color.BLACK)
-                but.setBackground(null);
-            else but.setBackground(Color.BLACK);
-
-        }
-    }
-
-    class returnToMainMenu implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            dispose();
-            JFrame b = new Menu();
-            b.setVisible(true);
-        }
-    }
-
-    class checkWin implements ActionListener
-    {
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            Game game = new Game();
-            game.checkWin(getFill().getTab(), getFill().getSize()-2);
-            if(game.getTOP())
-                topScore.setForeground(Color.GREEN);
-            else
-                topScore.setForeground(Color.RED);
-            if(game.getLEFT_SIDE())
-                leftScore.setForeground(Color.GREEN);
-            else
-                leftScore.setForeground(Color.RED);
-            if(game.getRIGHT_SIDE())
-                rightScore.setForeground(Color.GREEN);
-            else
-                rightScore.setForeground(Color.RED);
-            if(game.getBOTTOM())
-                bottomScore.setForeground(Color.GREEN);
-            else
-                bottomScore.setForeground(Color.RED);
-            if(game.getOVERALL()) {
-                dispose();
-                JOptionPane.showMessageDialog(null, "You solved the Puzzle!", "WINNER", JOptionPane.WARNING_MESSAGE);
-                Menu menu = new Menu();
-                menu.setVisible(true);
+    public void initializeFields() {
+        board.setLayout(new GridLayout(size, size));
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                fields[i][j] = new Field(i, j);
+                fields[i][j].addActionListener(new ButtonClickEvent());
+                board.add(fields[i][j]);
             }
         }
     }
+
+    public void setFieldColor(int x, int y, byte color) {
+        switch (color) {
+            case 0:
+                fields[x][y].setWhite();
+                break;
+            case 1:
+                fields[x][y].setBlack();
+                break;
+        }
+    }
+
+    public void setMenuBar() {
+        newGame = new JButton("New Game");
+        ownGame = new JButton("Own Game");
+        saveGame = new JButton("Save Game");
+        loadGame = new JButton("Load Game");
+        previous = new JButton("Previous");
+        next = new JButton("next");
+        menuBar.add(newGame);
+        menuBar.add(ownGame);
+        menuBar.add(saveGame);
+        menuBar.add(loadGame);
+        menuBar.add(previous);
+        menuBar.add(next);
+    }
+
 }

@@ -1,13 +1,10 @@
 package main;
 
-import board.Board;
-import board.Menu;
-
-import javax.swing.*;
+import logic.Game;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame menu = new Menu();
-        menu.setVisible(true);
+        Game game = new Game();
+
     }
 }
