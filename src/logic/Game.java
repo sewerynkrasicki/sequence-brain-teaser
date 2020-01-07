@@ -140,8 +140,14 @@ public class Game {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            CheckWin check = new CheckWin(northLine, southLine, eastLine, westLine, fieldsStatus);
-            System.out.println(check.checkOverallWin());
+            CheckWin checkWin = new CheckWin.Builder()
+                    .northLine(northLine)
+                    .southLine(southLine)
+                    .eastLine(eastLine)
+                    .westLine(westLine)
+                    .fieldsStatus(fieldsStatus)
+                    .build();
+            System.out.println(checkWin.checkOverallWin());
         }
     }
 

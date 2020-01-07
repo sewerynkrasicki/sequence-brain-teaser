@@ -8,15 +8,46 @@ public class CheckWin {
     int[] northLine, southLine, eastLine, westLine;
     byte[][] fieldsStatus;
 
-    //PAMIETAC BY UŻYĆ BUDOWNICZEGO!!!!!!
-    public CheckWin(int[] northLine, int[] southLine, int[] eastLine,
-                    int[] westLine, byte[][] fieldsStatus)
-    {
-        this.northLine = northLine;
-        this.southLine = southLine;
-        this.eastLine = eastLine;
-        this.westLine = westLine;
-        this.fieldsStatus = fieldsStatus;
+    //BUILDER
+    public static final class Builder {
+        private int[] northLine, southLine, eastLine, westLine;
+        private byte[][] fieldsStatus;
+
+        public Builder northLine(int[] northLine) {
+            this.northLine = northLine;
+            return this;
+        }
+
+        public Builder southLine(int[] southLine) {
+            this.southLine = southLine;
+            return this;
+        }
+
+        public Builder eastLine(int[] eastLine) {
+            this.eastLine = eastLine;
+            return this;
+        }
+
+        public Builder westLine(int[] westLine) {
+            this.westLine = westLine;
+            return this;
+        }
+
+        public Builder fieldsStatus(byte[][] fieldsStatus) {
+            this.fieldsStatus = fieldsStatus;
+            return this;
+        }
+
+        public CheckWin build()
+        {
+            CheckWin checkWin = new CheckWin();
+            checkWin.northLine = this.northLine;
+            checkWin.southLine = this.southLine;
+            checkWin.westLine = this.westLine;
+            checkWin.eastLine = this.eastLine;
+            checkWin.fieldsStatus = this.fieldsStatus;
+            return checkWin;
+        }
     }
 
     public boolean checkOverallWin()
