@@ -1,14 +1,14 @@
 package logic;
 
 public class CheckWin {
-    int longestSequenceBlack, longestSequenceWhite;
-    int x = 0, counter = 0;
-    boolean topSequenceBlack = true, bottomSequenceWhite = true;
-    boolean sideSequenceBlack = true, sideSequenceWhite = true;
-    int[] northLine, southLine, eastLine, westLine;
-    byte[][] fieldsStatus;
+    private int longestSequenceBlack, longestSequenceWhite;
+    private int x = 0, counter = 0;
+    private boolean topSequenceBlack = true, bottomSequenceWhite = true;
+    private boolean sideSequenceBlack = true, sideSequenceWhite = true;
+    private int[] northLine, southLine, eastLine, westLine;
+    private byte[][] fieldsStatus;
 
-    //BUILDER
+    //BUILDER DESIGN PATTERN
     public static final class Builder {
         private int[] northLine, southLine, eastLine, westLine;
         private byte[][] fieldsStatus;

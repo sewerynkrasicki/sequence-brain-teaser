@@ -9,6 +9,10 @@ public class Board extends JFrame {
 
     public JPanel board = new JPanel();
     public JPanel bottomTextPanel = new JPanel();
+    public JTextField topScore = new JTextField("TOP", 10);
+    public JTextField bottomScore = new JTextField("BOTTOM", 10);
+    public JTextField leftScore = new JTextField("LEFT", 10);
+    public JTextField rightScore = new JTextField("RIGHT", 10);
     public JButton checkTheWin = new JButton("Check the win");
     public JMenuBar menuBar;
     public Field[][] fields;
@@ -26,8 +30,14 @@ public class Board extends JFrame {
         this.menuBar = new MenuBar();
         this.setMenuBar();
         initializeFields();
-        add(BorderLayout.NORTH, menuBar);
         add(board);
+
+        bottomTextPanel.add(topScore);
+        bottomTextPanel.add(leftScore);
+        bottomTextPanel.add(rightScore);
+        bottomTextPanel.add(bottomScore);
+
+        add(BorderLayout.NORTH, menuBar);
         add(BorderLayout.EAST, checkTheWin);
         add(BorderLayout.SOUTH, bottomTextPanel);
         setVisible(true);

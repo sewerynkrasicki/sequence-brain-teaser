@@ -8,7 +8,7 @@ My final project to pass Java labs
 - ~~logic of the game~~
 - ~~Next/Undo function~~
 - ~~possibility to save / load the game~~
-- Add Bottom text panel with game state
+- ~~Add Bottom text panel with game state~~
 - Add possibility to create own board
 - Add tests
 

@@ -13,9 +13,9 @@ public class LoadFile implements ILoad {
         History history;
         FileInputStream fin = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream(fin);
-        history = (History)ois.readObject();
+        history = (History) ois.readObject();
         fin.close();
         ois.close();
-        return  history;
+        return history;
     }
 }
