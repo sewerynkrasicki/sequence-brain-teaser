@@ -13,27 +13,20 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Game {
-    //SINGLETON DESGIN PATTERN
-    private static Game INSTANCE;
-
-    public static Game getInstance() {
-        if (INSTANCE == null)
-            INSTANCE = new Game();
-
-        return INSTANCE;
-    }
 
     private byte[][] fieldsStatus; // 0 - white, 1 - black
-    private Board board;
+    public Board board;
     private History history;
     private FileHandler fileHandler;
-    private int mainGameSize = 12;
-    private int[] northLine = {2, 4, 2, 3, 1, 4, 7, 4, 2, 2};
-    private int[] southLine = {7, 2, 5, 4, 4, 3, 1, 1, 4, 5};
-    private int[] westLine = {3, 2, 3, 1, 8, 5, 3, 5, 1, 4};
-    private int[] eastLine = {5, 3, 4, 4, 1, 3, 5, 3, 3, 2};
+    private int mainGameSize;
+    private int[] northLine, southLine, westLine, eastLine;
 
-    private Game() {
+    public Game(int size, int[] north, int[] south, int[] east, int[] west) {
+        northLine = north;
+        southLine = south;
+        westLine = west;
+        eastLine = east;
+        this.mainGameSize = size + 2;
         this.board = new Board(mainGameSize);
         this.fieldsStatus = new byte[mainGameSize][mainGameSize];
         this.history = new History();
@@ -44,7 +37,7 @@ public class Game {
             }
         }
 
-        setNewGame();
+        setNewGame(northLine, southLine, westLine, eastLine);
 
         board.checkTheWin.addActionListener(new checkTheWin());
         board.previous.addActionListener(new PreviousAction());
@@ -52,11 +45,13 @@ public class Game {
         board.newGame.addActionListener(new NewGameAction());
         board.saveGame.addActionListener(new SaveGameAction());
         board.loadGame.addActionListener(new LoadGameAction());
+        board.ownGame.addActionListener(new ownBoard());
 
         board.previous.setEnabled(false);
         board.next.setEnabled(false);
     }
 
+    //Initialize new clean game and clears history
     public void newGame() {
         for (int i = 1; i < mainGameSize - 1; i++) {
             for (int j = 1; j < mainGameSize - 1; j++) {
@@ -70,8 +65,8 @@ public class Game {
         board.next.setEnabled(false);
     }
 
-
-    private void setNewGame() {
+    //Sets numbers on the edges
+    public void setNewGame(int[] northLine, int[] southLine, int[] westLine, int[] eastLine) {
         for (int i = 1; i < mainGameSize - 1; i++) {
             for (int j = 1; j < mainGameSize - 1; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -80,15 +75,15 @@ public class Game {
 
         //Setting up north line of numbers
         board.fields[0][0].setNumberField("");
-        board.fields[0][11].setNumberField("");
+        board.fields[0][mainGameSize - 1].setNumberField("");
         for (int i = 1; i < mainGameSize - 1; i++) {
             this.board.fields[0][i].setNumberField(Integer.toString(northLine[i - 1]));
         }
 
         //Setting up south line of numbers
-        board.fields[11][0].setNumberField("");
+        board.fields[mainGameSize - 1][0].setNumberField("");
         for (int i = 1; i < mainGameSize - 1; i++) {
-            this.board.fields[11][i].setNumberField(Integer.toString(southLine[i - 1]));
+            this.board.fields[mainGameSize - 1][i].setNumberField(Integer.toString(southLine[i - 1]));
         }
 
         //Setting up west line of numbers
@@ -97,12 +92,13 @@ public class Game {
         }
 
         //Setting up east line of numbers
-        board.fields[11][11].setNumberField("");
+        board.fields[mainGameSize - 1][mainGameSize - 1].setNumberField("");
         for (int i = 1; i < mainGameSize - 1; i++) {
-            this.board.fields[i][11].setNumberField(Integer.toString(eastLine[i - 1]));
+            this.board.fields[i][mainGameSize - 1].setNumberField(Integer.toString(eastLine[i - 1]));
         }
     }
 
+    //Creates field status backup
     public byte[][] fieldStatusClone() {
         byte[][] clonedFields = new byte[mainGameSize][mainGameSize];
         for (int i = 1; i < mainGameSize - 1; i++) {
@@ -111,24 +107,30 @@ public class Game {
         return clonedFields;
     }
 
+    //Returns serializable object which contains all necessary data
     private Data getActualData() {
-        return new Data(fieldStatusClone());
+        return new Data(fieldStatusClone(), mainGameSize - 2, northLine, southLine,
+                eastLine, westLine);
     }
 
-    private void LoadData(Data data) {
+    //Loads field status from serializable object
+    public void LoadData(Data data) {
         byte[][] fieldStatus = data.getFieldStatus();
-        for (int i = 1; i < mainGameSize - 1; i++) {
-            for (int j = 1; j < mainGameSize - 1; j++) {
+        for (int i = 1; i < data.getSize() + 2 - 1; i++) {
+            for (int j = 1; j < data.getSize() + 2 - 1; j++) {
                 this.fieldsStatus[i][j] = fieldStatus[i][j];
                 this.board.setFieldColor(i, j, fieldsStatus[i][j]);
             }
         }
     }
 
-    //Listeners
+    //----------------------------------------------------
+    //-------------------Listeners------------------------
+    //----------------------------------------------------
 
     public class FieldListener implements ChangeListener {
 
+        //Adds the button you clicked to the history
         @Override
         public void stateChanged(ChangeEvent ce) {
             int x = ((Field) ce.getSource()).getIdX();
@@ -151,7 +153,8 @@ public class Game {
     }
 
     public class checkTheWin implements ActionListener {
-
+        //Checks win if you click "Check" button
+        //If you win it shows winner message and stars new game
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             CheckWin checkWin = new CheckWin.Builder()
@@ -160,6 +163,7 @@ public class Game {
                     .eastLine(eastLine)
                     .westLine(westLine)
                     .fieldsStatus(fieldsStatus)
+                    .size(mainGameSize - 2)
                     .build();
             if (checkWin.checkOverallWin()) {
                 JOptionPane.showMessageDialog(null,
@@ -186,7 +190,7 @@ public class Game {
     }
 
     public class PreviousAction implements ActionListener {
-
+        //Undo move
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             LoadData(history.getPreviousData(getActualData()));
@@ -196,6 +200,7 @@ public class Game {
     }
 
     public class NextAction implements ActionListener {
+        //Redo move
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             LoadData(history.getNextData(getActualData()));
@@ -205,7 +210,7 @@ public class Game {
     }
 
     public class NewGameAction implements ActionListener {
-
+        //Sets new game
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             newGame();
@@ -213,7 +218,7 @@ public class Game {
     }
 
     public class SaveGameAction implements ActionListener {
-
+        //Saves the game
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             JFileChooser jfc = new JFileChooser();
@@ -231,7 +236,10 @@ public class Game {
     }
 
     public class LoadGameAction implements ActionListener {
-
+        /*
+        Loads the game and checks size compatibility with current state. If it is different, it creates
+        new game with that size and loads the game
+         */
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             JFileChooser jfc = new JFileChooser();
@@ -241,6 +249,18 @@ public class Game {
                 try {
                     History loadHistory = fileHandler.Load(path);
                     if (loadHistory.isPreviousPossible()) {
+                        int mainSize = loadHistory.checkData().getSize();
+                        if (mainGameSize - 2 != mainSize) {
+                            board.dispose();
+                            Game newGame = new Game(loadHistory.checkData().getSize(), loadHistory.checkData().getNorthLine(),
+                                    loadHistory.checkData().getSouthLine(), loadHistory.checkData().getEastLine(),
+                                    loadHistory.checkData().getWestLine());
+                            newGame.history = loadHistory;
+                            newGame.LoadData(newGame.history.checkData());
+                            newGame.board.previous.setEnabled(newGame.history.isPreviousPossible());
+                            newGame.board.next.setEnabled(newGame.history.isNextPossible());
+
+                        }
                         LoadData(loadHistory.getPreviousData(null));
                         history = loadHistory;
                         board.previous.setEnabled(history.isPreviousPossible());
@@ -250,6 +270,15 @@ public class Game {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public class ownBoard implements ActionListener {
+        //Creates own board
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            ownGame own = new ownGame();
+            board.dispose();
         }
     }
 }

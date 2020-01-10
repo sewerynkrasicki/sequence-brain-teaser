@@ -7,11 +7,13 @@ public class CheckWin {
     private boolean sideSequenceBlack = true, sideSequenceWhite = true;
     private int[] northLine, southLine, eastLine, westLine;
     private byte[][] fieldsStatus;
+    private int size;
 
     //BUILDER DESIGN PATTERN
     public static final class Builder {
         private int[] northLine, southLine, eastLine, westLine;
         private byte[][] fieldsStatus;
+        private int size;
 
         public Builder northLine(int[] northLine) {
             this.northLine = northLine;
@@ -38,6 +40,12 @@ public class CheckWin {
             return this;
         }
 
+        public Builder size(int size)
+        {
+            this.size = size;
+            return this;
+        }
+
         public CheckWin build()
         {
             CheckWin checkWin = new CheckWin();
@@ -46,21 +54,25 @@ public class CheckWin {
             checkWin.westLine = this.westLine;
             checkWin.eastLine = this.eastLine;
             checkWin.fieldsStatus = this.fieldsStatus;
+            checkWin.size = this.size;
             return checkWin;
         }
     }
 
+    //Checks win
     public boolean checkOverallWin()
     {
         return checkWinBlackTop()&&checkWinBlackSide()&&checkWinWhiteBottom()&&checkWinWhiteSide();
     }
 
 
-    //Check top sequence of black boxes
+    //Checks top sequence of black boxes
     public boolean checkWinBlackTop() {
-        while (x < 10) {
+        x = 0;
+        counter = 0;
+        while (x < size) {
             longestSequenceBlack = northLine[x];
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= size; i++) {
 
                 if (fieldsStatus[i][x + 1] == (byte) 1) {
                     counter++;
@@ -82,13 +94,13 @@ public class CheckWin {
         return topSequenceBlack;
     }
 
-    //Check side sequence of black boxes
+    //Checks side sequence of black boxes
     public boolean checkWinBlackSide() {
         x = 0;
         counter = 0;
-        while (x < 10) {
+        while (x < size) {
             longestSequenceBlack = westLine[x];
-            for (int j = 1; j <= 10; j++) {
+            for (int j = 1; j <= size; j++) {
 
                 if (fieldsStatus[x + 1][j] == (byte) 1) {
                     counter++;
@@ -110,14 +122,14 @@ public class CheckWin {
         return sideSequenceBlack;
     }
 
-    //Check bottom sequence of white boxes
+    //Checks bottom sequence of white boxes
     public boolean checkWinWhiteBottom() {
         x = 0;
         counter = 0;
 
-        while (x < 10) {
+        while (x < size) {
             longestSequenceWhite = southLine[x];
-            for (int j = 1; j <= 10; j++) {
+            for (int j = 1; j <= size; j++) {
 
                 if (fieldsStatus[j][x + 1] == (byte) 0) {
                     counter++;
@@ -139,13 +151,13 @@ public class CheckWin {
         return bottomSequenceWhite;
     }
 
-    //Check side sequence of white boxes
+    //Checks side sequence of white boxes
     public boolean checkWinWhiteSide() {
         x = 0;
         counter = 0;
-        while (x < 10) {
+        while (x < size) {
             longestSequenceWhite = eastLine[x];
-            for (int j = 1; j < 10; j++) {
+            for (int j = 1; j < size; j++) {
 
                 if (fieldsStatus[x + 1][j] == (byte) 0) {
                     counter++;

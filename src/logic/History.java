@@ -32,6 +32,11 @@ public class History implements Serializable {
         } else return history.pop();
     }
 
+    public Data checkData()
+    {
+        return history.peek();
+    }
+
     public Data getNextData(Data data) {
         addDataWithoutClearTemp(data);
         return historyTemp.pop();

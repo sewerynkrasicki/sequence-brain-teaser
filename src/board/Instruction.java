@@ -6,11 +6,27 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Instruction extends JDialog {
+    private static Instruction INSTANCE;
+
+    //Singleton design pattern
+    public static Instruction getInstance()
+    {
+        if(INSTANCE == null) {
+            INSTANCE = new Instruction();
+        }
+        return INSTANCE;
+    }
+
+
+    private Instruction() {
+    }
+
     JLabel jlText = new JLabel();
     ImageIcon imageIcon = new ImageIcon("./resources/image.gif");
     File file = new File("./resources/instruction.txt");
 
-    public Instruction() {
+    public void setInstruction()
+    {
         setTitle("Instruction");
         setLocationRelativeTo(null);
         setSize(500, 500);

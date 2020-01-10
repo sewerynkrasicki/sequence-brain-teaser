@@ -10,6 +10,6 @@ public class InstructionPopUp implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        JDialog ins = new Instruction();
+        Instruction.getInstance().setInstruction();
     }
 }
