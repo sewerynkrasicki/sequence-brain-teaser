@@ -9,7 +9,7 @@ My final project to pass Java labs
 - ~~Next/Undo function~~
 - ~~possibility to save / load the game~~
 - ~~Add Bottom text panel with game state~~
-- Add possibility to create own board
+- ~~Add possibility to create own board~~
 - Add tests
 
 ## What is it about?
