@@ -17,7 +17,7 @@ public class Board extends JFrame {
     public JMenuBar menuBar;
     public Field[][] fields;
     public int size;
-    public JButton newGame, ownGame, saveGame, loadGame, previous, next;
+    public JButton mainGame, newGame, ownGame, saveGame, loadGame, previous, next;
 
     public Board(int size) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -66,12 +66,14 @@ public class Board extends JFrame {
     }
 
     public void setMenuBar() {
+        mainGame = new JButton("Main Game");
         newGame = new JButton("New Game");
         ownGame = new JButton("Own Game");
         saveGame = new JButton("Save Game");
         loadGame = new JButton("Load Game");
         previous = new JButton("Previous");
         next = new JButton("next");
+        menuBar.add(mainGame);
         menuBar.add(newGame);
         menuBar.add(ownGame);
         menuBar.add(saveGame);

@@ -46,6 +46,7 @@ public class Game {
         board.saveGame.addActionListener(new SaveGameAction());
         board.loadGame.addActionListener(new LoadGameAction());
         board.ownGame.addActionListener(new ownBoard());
+        board.mainGame.addActionListener(new newMainGame());
 
         board.previous.setEnabled(false);
         board.next.setEnabled(false);
@@ -99,7 +100,7 @@ public class Game {
     }
 
     //Creates field status backup
-    public byte[][] fieldStatusClone() {
+    private byte[][] fieldStatusClone() {
         byte[][] clonedFields = new byte[mainGameSize][mainGameSize];
         for (int i = 1; i < mainGameSize - 1; i++) {
             System.arraycopy(fieldsStatus[i], 1, clonedFields[i], 1, mainGameSize - 1 - 1);
@@ -109,12 +110,18 @@ public class Game {
 
     //Returns serializable object which contains all necessary data
     private Data getActualData() {
-        return new Data(fieldStatusClone(), mainGameSize - 2, northLine, southLine,
-                eastLine, westLine);
+        return new Data.Builder()
+                .fieldStatus(fieldStatusClone())
+                .size(mainGameSize-2)
+                .northLine(northLine)
+                .southLine(southLine)
+                .eastLine(eastLine)
+                .westLine(westLine)
+                .build();
     }
 
     //Loads field status from serializable object
-    public void LoadData(Data data) {
+    private void LoadData(Data data) {
         byte[][] fieldStatus = data.getFieldStatus();
         for (int i = 1; i < data.getSize() + 2 - 1; i++) {
             for (int j = 1; j < data.getSize() + 2 - 1; j++) {
@@ -277,8 +284,31 @@ public class Game {
         //Creates own board
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            ownGame own = new ownGame();
+            OwnGame own = new OwnGame();
             board.dispose();
         }
     }
+
+    public class newMainGame implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            int[] north = {2, 4, 2, 3, 1, 4, 7, 4, 2, 2};
+            int[] south = {7, 2, 5, 4, 4, 3, 1, 1, 4, 5};
+            int[] west = {3, 2, 3, 1, 8, 5, 3, 5, 1, 4};
+            int[] east = {5, 3, 4, 4, 1, 3, 5, 3, 3, 2};
+            board.dispose();
+            Game newMainGame = new Game(10, north, south, west, east);
+        }
+    }
+
+    //Setter and getter neccessary to test
+    public void setFieldsStatus(byte[][] fieldsStatus) {
+        this.fieldsStatus = fieldsStatus;
+    }
+    public byte[][] getFieldsStatus() {
+        return fieldsStatus;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package logic;
 
 import java.io.Serializable;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class History implements Serializable {
@@ -51,7 +52,6 @@ public class History implements Serializable {
     public void clearHistory() {
         history.clear();
         historyTemp.clear();
-        ;
     }
 
     public boolean isNextPossible() {

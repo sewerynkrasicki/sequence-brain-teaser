@@ -7,18 +7,18 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ownGame {
+public class OwnGame {
     private ownBoard ownboard;
     private int size;
     private int[] getNorth, getSouth, getWest, getEast;
 
-    public ownGame()
+    public OwnGame()
     {
         ownboard = new ownBoard();
         ownboard.complete.addActionListener(new completeButton());
     }
 
-    public void initializeOwnGame()
+    private void initializeOwnGame()
     {
         Game game = new Game(size, getNorth, getSouth, getEast, getWest);
     }
