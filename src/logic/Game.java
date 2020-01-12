@@ -22,10 +22,10 @@ public class Game {
     private int[] northLine, southLine, westLine, eastLine;
 
     public Game(int size, int[] north, int[] south, int[] east, int[] west) {
-        northLine = north;
-        southLine = south;
-        westLine = west;
-        eastLine = east;
+        this.northLine = north;
+        this.southLine = south;
+        this.westLine = west;
+        this.eastLine = east;
         this.mainGameSize = size + 2;
         this.board = new Board(mainGameSize);
         this.fieldsStatus = new byte[mainGameSize][mainGameSize];
@@ -112,7 +112,7 @@ public class Game {
     private Data getActualData() {
         return new Data.Builder()
                 .fieldStatus(fieldStatusClone())
-                .size(mainGameSize-2)
+                .size(mainGameSize - 2)
                 .northLine(northLine)
                 .southLine(southLine)
                 .eastLine(eastLine)
@@ -131,9 +131,9 @@ public class Game {
         }
     }
 
-    //----------------------------------------------------
-    //-------------------Listeners------------------------
-    //----------------------------------------------------
+    //----------------------------------------------------\\
+    //-------------------Listeners------------------------\\
+    //----------------------------------------------------\\
 
     public class FieldListener implements ChangeListener {
 
@@ -298,7 +298,7 @@ public class Game {
             int[] west = {3, 2, 3, 1, 8, 5, 3, 5, 1, 4};
             int[] east = {5, 3, 4, 4, 1, 3, 5, 3, 3, 2};
             board.dispose();
-            Game newMainGame = new Game(10, north, south, west, east);
+            Game newMainGame = new Game(10, north, south, east, west);
         }
     }
 
@@ -306,9 +306,8 @@ public class Game {
     public void setFieldsStatus(byte[][] fieldsStatus) {
         this.fieldsStatus = fieldsStatus;
     }
+
     public byte[][] getFieldsStatus() {
         return fieldsStatus;
     }
-
-
 }

@@ -33,8 +33,7 @@ public class History implements Serializable {
         } else return history.pop();
     }
 
-    public Data checkData()
-    {
+    public Data checkData() {
         return history.peek();
     }
 

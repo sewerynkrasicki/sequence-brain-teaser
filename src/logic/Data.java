@@ -39,14 +39,12 @@ public class Data implements Serializable {
             return this;
         }
 
-        public Builder size(int size)
-        {
+        public Builder size(int size) {
             this.size = size;
             return this;
         }
 
-        public Data build()
-        {
+        public Data build() {
             Data data = new Data();
             data.northLine = this.northLine;
             data.southLine = this.southLine;
@@ -82,6 +80,5 @@ public class Data implements Serializable {
     public int[] getWestLine() {
         return westLine;
     }
-
 
 }

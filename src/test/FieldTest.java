@@ -9,25 +9,22 @@ import java.awt.*;
 public class FieldTest {
 
     @Test
-    public void getIdXTest_ShouldReturnGivenPosition()
-    {
-        Field field = new Field(5,5);
+    public void getIdXTest_ShouldReturnGivenPosition() {
+        Field field = new Field(5, 5);
         int x = field.getIdX();
-        Assert.assertEquals(5,x);
+        Assert.assertEquals(5, x);
     }
 
     @Test
-    public void getIdYTest_ShouldReturnGivenPosition()
-    {
-        Field field = new Field(5,5);
+    public void getIdYTest_ShouldReturnGivenPosition() {
+        Field field = new Field(5, 5);
         int y = field.getIdX();
-        Assert.assertEquals(5,y);
+        Assert.assertEquals(5, y);
     }
 
     @Test
-    public void setBlackTest_ShouldChangeFieldColorToBlack()
-    {
-        Field field = new Field(5,5);
+    public void setBlackTest_ShouldChangeFieldColorToBlack() {
+        Field field = new Field(5, 5);
         field.setBlack();
         Color color = Color.BLACK;
 
@@ -35,19 +32,17 @@ public class FieldTest {
     }
 
     @Test
-    public void setWhiteTest_ShouldChangeFieldColorToNull()
-    {
-        Field field = new Field(5,5);
+    public void setWhiteTest_ShouldChangeFieldColorToNull() {
+        Field field = new Field(5, 5);
         field.setBlack();
         field.setWhite();
 
-        Assert.assertEquals(null , field.getBackground());
+        Assert.assertEquals(null, field.getBackground());
     }
 
     @Test
-    public void setClickStatusTest_ShouldReturnClickStatus()
-    {
-        Field field = new Field(5,5);
+    public void setClickStatusTest_ShouldReturnClickStatus() {
+        Field field = new Field(5, 5);
         field.setClickStatus(true);
 
         Assert.assertEquals(true, field.getClickStatus());

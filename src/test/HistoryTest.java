@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class HistoryTest {
     byte[][] fieldsStatus = new byte[7][7];
-    int[] north = {2, 1 , 2, 2, 2};
+    int[] north = {2, 1, 2, 2, 2};
     int[] south = {2, 1, 3, 2, 2};
     int[] east = {3, 2, 3, 1, 2};
     int[] west = {1, 1, 1, 4, 2};
@@ -30,25 +30,23 @@ public class HistoryTest {
             .westLine(west)
             .fieldStatus(fieldsStatus)
             .build();
+
     @Test
-    public void addDataAndCheckDataTest_ShouldReturnAddedData()
-    {
+    public void addDataAndCheckDataTest_ShouldReturnAddedData() {
         History history = new History();
         history.addData(data);
         Assert.assertEquals(data, history.checkData());
     }
 
     @Test
-    public void addDataWithoutClearTempTest_ShouldAddData()
-    {
+    public void addDataWithoutClearTempTest_ShouldAddData() {
         History history = new History();
         history.addDataWithoutClearTemp(data);
         Assert.assertEquals(data, history.checkData());
     }
 
     @Test
-    public void getPreviousDataTest_ShouldReturnPreviousData()
-    {
+    public void getPreviousDataTest_ShouldReturnPreviousData() {
         History history = new History();
         history.addData(data);
         history.addData(data1);
@@ -57,8 +55,7 @@ public class HistoryTest {
     }
 
     @Test
-    public void getNextDataTest_ShouldReturnNextData()
-    {
+    public void getNextDataTest_ShouldReturnNextData() {
         History history = new History();
         history.addData(data);
         history.addData(data1);
@@ -68,8 +65,7 @@ public class HistoryTest {
     }
 
     @Test
-    public void clearHistoryTest_ShouldClearStack()
-    {
+    public void clearHistoryTest_ShouldClearStack() {
         History history = new History();
         history.addData(data);
         history.addData(data1);
@@ -80,8 +76,7 @@ public class HistoryTest {
     }
 
     @Test
-    public void isPreviousPossible_ShouldReturnTrueWhenNewDataAdded()
-    {
+    public void isPreviousPossible_ShouldReturnTrueWhenNewDataAdded() {
         History history = new History();
         history.addData(data);
         history.addData(data1);
@@ -90,15 +85,13 @@ public class HistoryTest {
     }
 
     @Test
-    public void isPreviousPossible_ShouldReturnFalseWhenHistoryHasNoPreviousData()
-    {
+    public void isPreviousPossible_ShouldReturnFalseWhenHistoryHasNoPreviousData() {
         History history = new History();
         Assert.assertFalse(history.isPreviousPossible());
     }
 
     @Test
-    public void isNextPossible_ShouldReturnTrueWhenHistoryHasNextData()
-    {
+    public void isNextPossible_ShouldReturnTrueWhenHistoryHasNextData() {
         History history = new History();
         history.addData(data);
         history.addData(data1);
@@ -107,13 +100,11 @@ public class HistoryTest {
     }
 
     @Test
-    public void isNextPossible_ShouldReturnFalseWhenHistoryHasNoNextData()
-    {
+    public void isNextPossible_ShouldReturnFalseWhenHistoryHasNoNextData() {
         History history = new History();
         history.addData(data);
         history.addData(data1);
         Assert.assertFalse(history.isNextPossible());
     }
-
 
 }

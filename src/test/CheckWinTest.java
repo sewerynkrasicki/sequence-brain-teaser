@@ -6,14 +6,13 @@ import org.junit.Test;
 
 public class CheckWinTest {
     byte[][] fieldsStatus = new byte[7][7];
-    int[] north = {2, 1 , 2, 2, 2};
+    int[] north = {2, 1, 2, 2, 2};
     int[] south = {2, 1, 3, 2, 2};
     int[] east = {3, 2, 3, 1, 2};
     int[] west = {1, 1, 1, 4, 2};
 
     @Test
-    public void checkWinBlackTopTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber()
-    {
+    public void checkWinBlackTopTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -35,8 +34,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinBlackTopTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber()
-    {
+    public void checkWinBlackTopTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -60,8 +58,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinBlackSideTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber()
-    {
+    public void checkWinBlackSideTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -82,8 +79,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinBlackSideTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber()
-    {
+    public void checkWinBlackSideTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -105,8 +101,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinWhiteBottomTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber()
-    {
+    public void checkWinWhiteBottomTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -137,8 +132,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinWhiteBottomTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber()
-    {
+    public void checkWinWhiteBottomTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -163,8 +157,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinWhiteSideTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber()
-    {
+    public void checkWinWhiteSideTest_ShouldReturnTrueWhenLongestSequenceIsTheSameSizeOrSmallerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -195,8 +188,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkWinWhiteSideTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber()
-    {
+    public void checkWinWhiteSideTest_ShouldReturnFalseWhenLongestSequenceIsBiggerThanNumber() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -220,8 +212,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkOverallWinTest_ShouldReturnTrueWhileAllChecksAreTrue()
-    {
+    public void checkOverallWinTest_ShouldReturnTrueWhileAllChecksAreTrue() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;
@@ -252,8 +243,7 @@ public class CheckWinTest {
     }
 
     @Test
-    public void checkOverallWinTest_ShouldReturnFalseWhileOneOfChecksIsFalse()
-    {
+    public void checkOverallWinTest_ShouldReturnFalseWhileOneOfChecksIsFalse() {
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
                 this.fieldsStatus[i][j] = 0;

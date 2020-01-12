@@ -40,14 +40,12 @@ public class CheckWin {
             return this;
         }
 
-        public Builder size(int size)
-        {
+        public Builder size(int size) {
             this.size = size;
             return this;
         }
 
-        public CheckWin build()
-        {
+        public CheckWin build() {
             CheckWin checkWin = new CheckWin();
             checkWin.northLine = this.northLine;
             checkWin.southLine = this.southLine;
@@ -60,9 +58,8 @@ public class CheckWin {
     }
 
     //Checks win
-    public boolean checkOverallWin()
-    {
-        return checkWinBlackTop()&&checkWinBlackSide()&&checkWinWhiteBottom()&&checkWinWhiteSide();
+    public boolean checkOverallWin() {
+        return checkWinBlackTop() && checkWinBlackSide() && checkWinWhiteBottom() && checkWinWhiteSide();
     }
 
 
@@ -178,6 +175,5 @@ public class CheckWin {
         }
         return sideSequenceWhite;
     }
-
 
 }

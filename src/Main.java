@@ -1,5 +1,3 @@
-package main;
-
 import logic.Game;
 
 public class Main {
@@ -9,6 +7,6 @@ public class Main {
         int[] westLine = {3, 2, 3, 1, 8, 5, 3, 5, 1, 4};
         int[] eastLine = {5, 3, 4, 4, 1, 3, 5, 3, 3, 2};
 
-        Game game = new Game(10, northLine, southLine, westLine, eastLine);
+        Game game = new Game(10, northLine, southLine, eastLine, westLine);
     }
 }

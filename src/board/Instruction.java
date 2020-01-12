@@ -9,9 +9,8 @@ public class Instruction extends JDialog {
     private static Instruction INSTANCE;
 
     //Singleton design pattern
-    public static Instruction getInstance()
-    {
-        if(INSTANCE == null) {
+    public static Instruction getInstance() {
+        if (INSTANCE == null) {
             INSTANCE = new Instruction();
         }
         return INSTANCE;
@@ -25,8 +24,7 @@ public class Instruction extends JDialog {
     ImageIcon imageIcon = new ImageIcon("./resources/image.gif");
     File file = new File("./resources/instruction.txt");
 
-    public void setInstruction()
-    {
+    public void setInstruction() {
         setTitle("Instruction");
         setLocationRelativeTo(null);
         setSize(500, 500);

@@ -3,7 +3,7 @@ package board;
 import javax.swing.*;
 import java.awt.*;
 
-public class ownBoard extends JFrame {
+public class OwnBoard extends JFrame {
     public JTextField size = new JTextField("Size of sequence");
     public JTextField north = new JTextField("North line of numbers (separated by space)");
     public JTextField south = new JTextField("South line of numbers (separated by space)");
@@ -12,7 +12,7 @@ public class ownBoard extends JFrame {
     public JButton complete = new JButton("Create");
     public JPanel textPanel = new JPanel();
 
-    public ownBoard() {
+    public OwnBoard() {
         setLocationRelativeTo(null);
         setTitle("Creator");
         setSize(400, 500);
